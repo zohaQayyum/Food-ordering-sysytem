@@ -1,0 +1,2 @@
+module AppCheckHelper
+end
