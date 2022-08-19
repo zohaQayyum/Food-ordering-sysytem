@@ -3197,14 +3197,25 @@ input[type="button"].btn-block {
   background-color: transparent;
   border: 0;
 }
+.dropdown-item-style {
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #3a3b45;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
 
-.dropdown-item:hover, .dropdown-item:focus {
+.dropdown-item:hover, .dropdown-item:focus, .dropdown-item-style:hover, .dropdown-item-style:focus{
   color: #2e2f37;
   text-decoration: none;
   background-color: #eaecf4;
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active, .dropdown-item:active, .dropdown-item-style.active, .dropdown-item-style:active {
   color: #fff;
   text-decoration: none;
   background-color: #4e73df;
