@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_active_from: 2022-08-18
+  date_active_to: 2022-08-18
+  time_active_from: 2022-08-18 12:04:52
+  time_active_to: 2022-08-18 12:04:52
+  discount: one
+
+two:
+  date_active_from: 2022-08-18
+  date_active_to: 2022-08-18
+  time_active_from: 2022-08-18 12:04:52
+  time_active_to: 2022-08-18 12:04:52
+  discount: two

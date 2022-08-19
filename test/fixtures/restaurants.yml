@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  contact: 1
+  status: MyString
+  time_open_at: 2022-08-17 16:03:28
+  time_close_at: 2022-08-17 16:03:28
+
+two:
+  name: MyString
+  contact: 1
+  status: MyString
+  time_open_at: 2022-08-17 16:03:28
+  time_close_at: 2022-08-17 16:03:28
