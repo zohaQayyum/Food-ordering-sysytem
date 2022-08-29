@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  food_item: one
+  order_item: one
+  deal: one
+  group_item: one
+
+two:
+  food_item: two
+  order_item: two
+  deal: two
+  group_item: two
