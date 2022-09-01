@@ -4,4 +4,3 @@ class OrderHistory < ApplicationRecord
   belongs_to :deal
   belongs_to :group_item
 end
- 
