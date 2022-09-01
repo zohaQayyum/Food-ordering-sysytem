@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_30_110423) do
+ActiveRecord::Schema.define(version: 2022_08_31_121116) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -278,7 +278,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_110423) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.string "method"
+    t.integer "method", default: 0
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -306,7 +306,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_110423) do
   create_table "restaurants", force: :cascade do |t|
     t.string "contact"
     t.string "name"
-    t.string "status"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

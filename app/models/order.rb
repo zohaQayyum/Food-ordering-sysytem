@@ -7,5 +7,6 @@ class Order < ApplicationRecord
   validates :rating_id, uniqueness: true
   belongs_to :voucher
   belongs_to :order_status,  dependent: :destroy
+
 end
   
