@@ -10,13 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_30_105728) do
+ActiveRecord::Schema.define(version: 2022_08_31_121116) do
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.string "author_type"
+    t.integer "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
 
   create_table "add_ons", force: :cascade do |t|
     t.string "item_name"
     t.float "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "customers", force: :cascade do |t|
@@ -144,17 +170,6 @@ ActiveRecord::Schema.define(version: 2022_08_30_105728) do
     t.index ["option_id"], name: "index_menu_options_on_option_id"
   end
 
-  create_table "menu_timings", force: :cascade do |t|
-    t.time "open_to"
-    t.time "open_from"
-    t.integer "menu_id", null: false
-    t.integer "weekday_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["menu_id"], name: "index_menu_timings_on_menu_id"
-    t.index ["weekday_id"], name: "index_menu_timings_on_weekday_id"
-  end
-
   create_table "menus", force: :cascade do |t|
     t.string "name"
     t.integer "restaurant_id", null: false
@@ -229,14 +244,10 @@ ActiveRecord::Schema.define(version: 2022_08_30_105728) do
     t.integer "rating_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "voucher_id"
-    t.integer "order_status_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
     t.index ["payment_id"], name: "index_orders_on_payment_id"
     t.index ["rating_id"], name: "index_orders_on_rating_id"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
-    t.index ["voucher_id"], name: "index_orders_on_voucher_id"
   end
 
   create_table "payment_cut_offs", force: :cascade do |t|
@@ -252,7 +263,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_105728) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.string "method"
+    t.integer "method", default: 0
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -280,7 +291,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_105728) do
   create_table "restaurants", force: :cascade do |t|
     t.string "contact"
     t.string "name"
-    t.string "status"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -321,8 +332,6 @@ ActiveRecord::Schema.define(version: 2022_08_30_105728) do
   add_foreign_key "menu_items", "menus"
   add_foreign_key "menu_options", "menu_items"
   add_foreign_key "menu_options", "options"
-  add_foreign_key "menu_timings", "menus"
-  add_foreign_key "menu_timings", "weekdays"
   add_foreign_key "menus", "restaurants"
   add_foreign_key "order_histories", "deals"
   add_foreign_key "order_histories", "food_items"
@@ -334,11 +343,9 @@ ActiveRecord::Schema.define(version: 2022_08_30_105728) do
   add_foreign_key "order_item_options", "order_items"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "customers"
-  add_foreign_key "orders", "order_statuses"
   add_foreign_key "orders", "payments"
   add_foreign_key "orders", "ratings"
   add_foreign_key "orders", "restaurants"
-  add_foreign_key "orders", "vouchers"
   add_foreign_key "payment_cut_offs", "payments"
   add_foreign_key "restaurant_timings", "restaurants"
   add_foreign_key "restaurant_timings", "weekdays"

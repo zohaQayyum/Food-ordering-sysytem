@@ -6,4 +6,3 @@ class MenuItem < ApplicationRecord
 	has_many :menu_options
 	has_many :options, through: :menu_options
 end
-   
