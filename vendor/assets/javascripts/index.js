@@ -1,3 +1,3 @@
 import 'sb-admin-2';
-import 'jquery-easing/jquery'
-import 'Chart'
+import 'bootstrap';
+import 'active_admin';
