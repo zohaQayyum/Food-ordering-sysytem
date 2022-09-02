@@ -1,9 +1,13 @@
 class Voucher < ApplicationRecord
-  has_many :orders 
-  has_many :voucher_timelines,  dependent: :destroy
+  has_many :orders
   has_many :discounts
 
-  def name 
+  def name
     "#{promo_code}"
-  end 
+  end
+  has_many :voucher_timelines, dependent: :destroy
+  enum voucher_status: {
+    Activate: 0,
+    Deactivate: 1,
+  }
 end

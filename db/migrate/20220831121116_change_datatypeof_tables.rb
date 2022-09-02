@@ -7,7 +7,6 @@ class ChangeDatatypeofTables < ActiveRecord::Migration[6.1]
       t.change :status, :integer, default: 0
     end
   end
-  
   def self.down
     change_table :payments do |t|
       t.change :method, :string

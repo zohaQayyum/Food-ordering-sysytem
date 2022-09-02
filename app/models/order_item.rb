@@ -5,4 +5,3 @@ class OrderItem < ApplicationRecord
   has_many :order_item_add_ons
   has_many :order_item_options
 end
- 

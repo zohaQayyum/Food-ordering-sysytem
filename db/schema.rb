@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
 
   create_table "discounts", force: :cascade do |t|
     t.integer "discount_percent"
-    t.string "discount_type"
+    t.integer "discount_type", default: 0
     t.integer "voucher_id", null: false
     t.integer "restaurant_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string "position"
+    t.integer "position"
     t.integer "manager_id"
     t.integer "restaurant_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -174,11 +174,9 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.time "open_to"
     t.time "open_from"
     t.integer "menu_id", null: false
-    t.integer "weekday_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["menu_id"], name: "index_menu_timings_on_menu_id"
-    t.index ["weekday_id"], name: "index_menu_timings_on_weekday_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -239,12 +237,6 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.index ["orderable_type", "orderable_id"], name: "index_order_items_on_orderable"
   end
 
-  create_table "order_statuses", force: :cascade do |t|
-    t.string "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "orders", force: :cascade do |t|
     t.integer "total_amount"
     t.datetime "date_time"
@@ -252,16 +244,15 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.integer "customer_id", null: false
     t.integer "payment_id", null: false
     t.integer "restaurant_id", null: false
-    t.integer "rating_id", null: false
+    t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "voucher_id"
-    t.integer "order_status_id"
+    t.integer "status", default: 0
     t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
     t.index ["payment_id"], name: "index_orders_on_payment_id"
-    t.index ["rating_id"], name: "index_orders_on_rating_id"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
+    t.index ["review_id"], name: "index_orders_on_review_id"
     t.index ["voucher_id"], name: "index_orders_on_voucher_id"
   end
 
@@ -284,29 +275,28 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "ratings", force: :cascade do |t|
-    t.float "rating"
-    t.date "date_recorded"
-    t.string "remarks"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "restaurant_timings", force: :cascade do |t|
     t.time "open_to"
     t.time "open_from"
     t.integer "restaurant_id", null: false
-    t.integer "weekday_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "weekdays", default: 0
     t.index ["restaurant_id"], name: "index_restaurant_timings_on_restaurant_id"
-    t.index ["weekday_id"], name: "index_restaurant_timings_on_weekday_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
     t.string "contact"
     t.string "name"
     t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.date "date_recorded"
+    t.string "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -321,14 +311,8 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
   end
 
   create_table "vouchers", force: :cascade do |t|
-    t.boolean "voucher_status"
+    t.integer "voucher_status", default: 0
     t.integer "promo_code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "weekdays", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -348,7 +332,6 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
   add_foreign_key "menu_options", "menu_items"
   add_foreign_key "menu_options", "options"
   add_foreign_key "menu_timings", "menus"
-  add_foreign_key "menu_timings", "weekdays"
   add_foreign_key "menus", "restaurants"
   add_foreign_key "order_histories", "deals"
   add_foreign_key "order_histories", "food_items"
@@ -360,13 +343,11 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
   add_foreign_key "order_item_options", "order_items"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "customers"
-  add_foreign_key "orders", "order_statuses"
   add_foreign_key "orders", "payments"
-  add_foreign_key "orders", "ratings"
   add_foreign_key "orders", "restaurants"
+  add_foreign_key "orders", "reviews"
   add_foreign_key "orders", "vouchers"
   add_foreign_key "payment_cut_offs", "payments"
   add_foreign_key "restaurant_timings", "restaurants"
-  add_foreign_key "restaurant_timings", "weekdays"
   add_foreign_key "voucher_timelines", "vouchers"
 end
