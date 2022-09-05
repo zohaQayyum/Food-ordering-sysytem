@@ -9,5 +9,4 @@ ActiveAdmin.register PaymentCutOff do
     column :restaurant
     actions
   end
-
 end
