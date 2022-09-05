@@ -69,8 +69,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-    addressable (2.8.0)
-      public_suffix (>= 2.0.2, < 5.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
@@ -98,6 +98,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.6)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     erubi (1.11.0)
     ffi (1.15.5)
     formtastic (4.0.0)
@@ -196,11 +199,7 @@ GEM
       activerecord (>= 6.0.4)
       activesupport (>= 6.0.4)
       i18n
-<<<<<<< HEAD
-    rb-fsevent (0.11.1)
-=======
     rb-fsevent (0.11.2)
->>>>>>> main
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.5.0)
@@ -273,6 +272,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  devise_invitable (~> 2.0.0)
   jbuilder (~> 2.7)
   listen (~> 3.3)
   puma (~> 5.0)

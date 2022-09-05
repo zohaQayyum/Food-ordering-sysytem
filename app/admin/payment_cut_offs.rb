@@ -1,13 +1,13 @@
 ActiveAdmin.register PaymentCutOff do
-
-  permit_params :admin_percent, :admin_amount, :restaurant_percent, :restaurant_amount, :total_amount, :payment_id
+  permit_params :admin_percent, :admin_amount, :restaurant_percent, :restaurant_amount, :total_amount, :restaurant_id
 
   index do
     column :admin_amount
     column :admin_percent
     column :restaurant_percent
     column :total_amount
-    column :payment_id
+    column :restaurant
+    actions
   end
-  
+
 end

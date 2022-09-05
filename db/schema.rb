@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_121116) do
+ActiveRecord::Schema.define(version: 2022_09_05_065847) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -86,18 +86,15 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
   create_table "discounts", force: :cascade do |t|
     t.integer "discount_percent"
     t.integer "discount_type", default: 0
-    t.integer "voucher_id", null: false
     t.integer "restaurant_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["restaurant_id"], name: "index_discounts_on_restaurant_id"
-    t.index ["voucher_id"], name: "index_discounts_on_voucher_id"
   end
 
   create_table "employees", force: :cascade do |t|
-    t.integer "position"
+    t.integer "position", default: 0
     t.integer "manager_id"
-    t.integer "restaurant_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email", default: "", null: false
@@ -107,7 +104,19 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.datetime "remember_created_at"
     t.string "first_name"
     t.string "last_name"
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.integer "invited_by_id"
+    t.integer "invitations_count", default: 0
+    t.integer "restaurant_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["invitation_token"], name: "index_employees_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_employees_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_employees_on_invited_by"
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
     t.index ["restaurant_id"], name: "index_employees_on_restaurant_id"
   end
@@ -116,12 +125,10 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.integer "quantity"
     t.string "name"
     t.float "price"
-    t.integer "deal_id", null: false
-    t.integer "discount_id", null: false
     t.integer "group_item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["deal_id"], name: "index_food_items_on_deal_id"
+    t.integer "discount_id"
     t.index ["discount_id"], name: "index_food_items_on_discount_id"
     t.index ["group_item_id"], name: "index_food_items_on_group_item_id"
   end
@@ -156,7 +163,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "menuable_type", null: false
     t.integer "menuable_id", null: false
-    t.integer "menu_id"
+    t.integer "menu_id", null: false
     t.index ["menu_id"], name: "index_menu_items_on_menu_id"
     t.index ["menuable_type", "menuable_id"], name: "index_menu_items_on_menuable"
   end
@@ -174,9 +181,11 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.time "open_to"
     t.time "open_from"
     t.integer "menu_id", null: false
+    t.integer "weekday_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["menu_id"], name: "index_menu_timings_on_menu_id"
+    t.index ["weekday_id"], name: "index_menu_timings_on_weekday_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -197,10 +206,10 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
   create_table "order_histories", force: :cascade do |t|
     t.integer "food_item_id", null: false
     t.integer "order_item_id", null: false
-    t.integer "deal_id", null: false
     t.integer "group_item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "deal_id"
     t.index ["deal_id"], name: "index_order_histories_on_deal_id"
     t.index ["food_item_id"], name: "index_order_histories_on_food_item_id"
     t.index ["group_item_id"], name: "index_order_histories_on_group_item_id"
@@ -244,11 +253,11 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.integer "customer_id", null: false
     t.integer "payment_id", null: false
     t.integer "restaurant_id", null: false
-    t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "voucher_id"
     t.integer "status", default: 0
+    t.integer "review_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["payment_id"], name: "index_orders_on_payment_id"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
@@ -265,7 +274,9 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.integer "payment_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "restaurant_id"
     t.index ["payment_id"], name: "index_payment_cut_offs_on_payment_id"
+    t.index ["restaurant_id"], name: "index_payment_cut_offs_on_restaurant_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -294,7 +305,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "rating"
+    t.float "rating"
     t.date "date_recorded"
     t.string "remarks"
     t.datetime "created_at", precision: 6, null: false
@@ -315,13 +326,13 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
     t.integer "promo_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "discount_id"
+    t.index ["discount_id"], name: "index_vouchers_on_discount_id"
   end
 
   add_foreign_key "deal_items", "deals"
   add_foreign_key "discounts", "restaurants"
-  add_foreign_key "discounts", "vouchers"
   add_foreign_key "employees", "restaurants"
-  add_foreign_key "food_items", "deals"
   add_foreign_key "food_items", "discounts"
   add_foreign_key "food_items", "group_items"
   add_foreign_key "food_option_prices", "food_items"
@@ -332,6 +343,7 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
   add_foreign_key "menu_options", "menu_items"
   add_foreign_key "menu_options", "options"
   add_foreign_key "menu_timings", "menus"
+  add_foreign_key "menu_timings", "weekdays"
   add_foreign_key "menus", "restaurants"
   add_foreign_key "order_histories", "deals"
   add_foreign_key "order_histories", "food_items"
@@ -350,4 +362,5 @@ ActiveRecord::Schema.define(version: 2022_08_31_121116) do
   add_foreign_key "payment_cut_offs", "payments"
   add_foreign_key "restaurant_timings", "restaurants"
   add_foreign_key "voucher_timelines", "vouchers"
+  add_foreign_key "vouchers", "discounts"
 end

@@ -6,9 +6,6 @@ class Order < ApplicationRecord
   belongs_to :review
   validates :review_id, uniqueness: true
   belongs_to :voucher
-<<<<<<< HEAD
-  belongs_to :order_status,  dependent: :destroy
-=======
 
   enum status: {
     Options: 0,
@@ -18,6 +15,5 @@ class Order < ApplicationRecord
     Cancelled: 4,
     Delivering: 5
   }
->>>>>>> main
 
 end
