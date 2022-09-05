@@ -8,4 +8,8 @@ class Customer < ApplicationRecord
   def name
     [first_name, last_name].compact.join(' ')
   end
+
+  def address
+    [street_address, city, ',', state].compact.join(' ')
+  end
 end

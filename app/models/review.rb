@@ -11,5 +11,4 @@ class Review < ApplicationRecord
   def name
     "#{rating}"
   end
-
 end

@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def authenticate_inviter!
-      authenticate_admin_user!(force: true)
-    end
+  def authenticate_inviter!
+    authenticate_admin_user!(force: true)
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:firstName, :lastName])

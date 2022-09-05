@@ -8,5 +8,4 @@ class Payment < ApplicationRecord
 	def payment_id
 		"#{method}"
 	end
-
 end

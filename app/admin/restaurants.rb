@@ -1,5 +1,4 @@
 ActiveAdmin.register Restaurant do
-
   scope :OpenRestaurants
   permit_params :contact, :name, :status, :menus
 
@@ -21,5 +20,4 @@ ActiveAdmin.register Restaurant do
     end
     actions
   end
-
 end
