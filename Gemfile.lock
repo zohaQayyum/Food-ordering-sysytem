@@ -74,6 +74,8 @@ GEM
     arbre (1.5.0)
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
+    backable (1.0.2)
+      rails (>= 3)
     bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.13.0)
@@ -268,6 +270,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  backable
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
