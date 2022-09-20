@@ -1,5 +1,4 @@
 class CustomersController < ApplicationController
-
   def index
     if params[:restaurant_id]
       @restaurant =  current_employee.restaurant

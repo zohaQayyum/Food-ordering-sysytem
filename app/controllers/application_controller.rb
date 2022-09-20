@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if current_employee
       employees_index_path
-
     elsif current_admin_user
       admin_dashboard_path
     end

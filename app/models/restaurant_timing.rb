@@ -1,6 +1,7 @@
 class RestaurantTiming < ApplicationRecord
   belongs_to :restaurant
   has_many :payment_cut_offs,  dependent: :destroy
+
   enum weekdays: {
     Select: 0,
     Monday: 1,

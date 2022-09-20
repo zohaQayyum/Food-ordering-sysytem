@@ -8,6 +8,7 @@ class Restaurant < ApplicationRecord
 	has_many :orders,  dependent: :destroy
 	has_many :discounts,  dependent: :destroy
 	validates :name, :contact, presence: true
+
 	enum status: {
     Select: 0,
     Open: 1,

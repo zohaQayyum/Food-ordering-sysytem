@@ -51,7 +51,7 @@
                 <div class="form-group">
                   <label for="Discount" class="form-edit-label">Discount</label>
                   <div class= "form-select">
-                    <%= f.select :discount_id, Discount.all.to_a.map  { |t| ["#{t.discount_type}", t.id] }, {include_blank: "Select Discount"}, class: "form-control" %>
+                    <%= f.select :discount_id, Discount.all.to_a.map  { |t| ["#{t.discount_percent}% #{t.discount_type}", t.id] }, {include_blank: "Select Discount"}, class: "form-control" %>
                   </div>
                 </div>
               </div>

@@ -16,7 +16,6 @@ class FoodItemsController < ApplicationController
     @food = FoodItem.new(food_params)
     if @food.save
       redirect_to  restaurant_food_items_url(current_employee)
-
     else
       redirect_to restaurant_food_items_url(current_employee), notice: "Can't be empty"
     end

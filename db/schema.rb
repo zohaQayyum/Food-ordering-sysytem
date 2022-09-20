@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_05_065847) do
+ActiveRecord::Schema.define(version: 2022_09_19_115546) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -81,6 +81,9 @@ ActiveRecord::Schema.define(version: 2022_09_05_065847) do
     t.time "time_active_to"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "deal_type", default: 0
+    t.string "description"
+    t.float "price"
   end
 
   create_table "discounts", force: :cascade do |t|
@@ -181,11 +184,10 @@ ActiveRecord::Schema.define(version: 2022_09_05_065847) do
     t.time "open_to"
     t.time "open_from"
     t.integer "menu_id", null: false
-    t.integer "weekday_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "weekdays", default: 0
     t.index ["menu_id"], name: "index_menu_timings_on_menu_id"
-    t.index ["weekday_id"], name: "index_menu_timings_on_weekday_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -343,7 +345,6 @@ ActiveRecord::Schema.define(version: 2022_09_05_065847) do
   add_foreign_key "menu_options", "menu_items"
   add_foreign_key "menu_options", "options"
   add_foreign_key "menu_timings", "menus"
-  add_foreign_key "menu_timings", "weekdays"
   add_foreign_key "menus", "restaurants"
   add_foreign_key "order_histories", "deals"
   add_foreign_key "order_histories", "food_items"

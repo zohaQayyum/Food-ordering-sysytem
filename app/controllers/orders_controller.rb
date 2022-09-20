@@ -3,5 +3,4 @@ class OrdersController < ApplicationController
     @restaurant =  current_employee.restaurant
     @order = @restaurant.orders
   end
-
 end
