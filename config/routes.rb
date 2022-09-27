@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root 'welcome#index'
@@ -16,12 +15,14 @@ Rails.application.routes.draw do
   resources :deals, only: [:index, :create, :new, :edit, :update, :destroy]
   resources :deal_items, only: [:index, :create, :new, :destroy]
   resources :vouchers, only: [:index, :create, :new, :edit, :update, :destroy]
+  resources :discounts, only: [:index, :create, :new, :edit, :update, :destroy]
+  resources :reviews, only: [:index]
+  resources :orders, only: [:index, :destroy]
+  resources :menus, only: [:index, :create, :new]
 
   get 'food_items/index'
   get 'food_items/edit'
   post 'food_items/create'
-
-  get 'orders/list'
 
   get 'welcome/charts'
   get 'welcome/login'
@@ -30,11 +31,9 @@ Rails.application.routes.draw do
   get 'employees/index'
   get 'customers/customer_list'
 
-  get 'menus/index'
   get 'menus/food_item'
   get 'menus/deal'
 
   get 'deals/index'
   get 'deals/new'
-
 end

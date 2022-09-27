@@ -1,6 +1,5 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
 	<!-- Sidebar - Brand -->
 	<div class="sidebar-brand d-flex align-items-center justify-content-center">
 		<div class="sidebar-brand-icon rotate-n-15">
@@ -11,6 +10,7 @@
 		<% end %>
 		</div>
 	</div>
+
 	<!-- Divider -->
 	<hr class="sidebar-divider my-0">
 
@@ -41,7 +41,7 @@
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Custom Components:</h6>
 				<%= link_to("Order List", restaurant_orders_path(:restaurant_id), :class => "collapse-item")%>
-				<a class="collapse-item" href="buttons.html">Reviews</a>
+					<%= link_to("Reviews", reviews_path, :class => "collapse-item")%>
 			</div>
 		</div>
 	</li>
@@ -57,8 +57,7 @@
 			data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Custom Utilities:</h6>
-				<%= link_to("Menu List",  menus_index_path, :class => "collapse-item")%>
-				<a class="collapse-item" href="utilities-animation.html">Categories</a>
+				<%= link_to("Menu List",  menus_path, :class => "collapse-item")%>
 				<%= link_to("Menu Items", restaurant_food_items_path(current_employee), :class => "collapse-item")%>
 				<a class="collapse-item" href="utilities-other.html">Options</a>
 				<a class="collapse-item" href="utilities-other.html">AddOns</a>
@@ -102,7 +101,7 @@
 		</a>
 		<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<a class="collapse-item" href="login.html">Discounts</a>
+				<%= link_to("Discounts", discounts_path, :class => "collapse-item")%>
 				<div class="collapse-divider"></div>
 				<%= link_to("Vouchers", vouchers_path, :class => "collapse-item")%>
 			</div>
@@ -132,5 +131,3 @@
 	</div>
 </ul>
 <!-- End of Sidebar -->
-
-

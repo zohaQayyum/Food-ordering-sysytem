@@ -6,8 +6,19 @@ class Voucher < ApplicationRecord
 
   enum voucher_status: {
     Active: 0,
-    Deactivate: 1,
+    Expire: 1,
   }
+
+  delegate :discount_percent, to: :discounts
+  delegate :discount_type, to: :discounts
+
+  def discount_percent
+    discount.discount_percent
+  end
+
+  def discount_type
+    discount.discount_type
+  end
 
   def name
     "#{promo_code}"

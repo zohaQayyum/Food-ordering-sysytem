@@ -1,0 +1,7 @@
+<%= search_form_for([:review, @q], url: url_for(controller: 'reviews', action: 'index') ) do |f| %>
+  <%= f.search_field :customer_first_name_or_customer_last_name_or_order_items_orderable_of_FoodItem_type_name_or_order_items_orderable_of_GroupItem_type_name_or_review_remarks_or_created_at_or_customer_full_name_cont, placeholder:"Search....", class: "right-btn"%>
+  <%= f.label "Rating:"%>
+  <%= f.select :review_rating_eq, Review.ratings.to_a.map { |w| [w[0].humanize, w[1]] },
+                         {:include_blank => true} %>
+  <%= f.submit%>
+<% end %>

@@ -1,0 +1,3 @@
+<%= search_form_for @q, url: restaurant_food_items_url(current_employee) do |f| %>
+  <%= f.search_field :menu_items_menuable_of_GroupItem_type_food_items_name_cont, placeholder:"Search....", class: "right-btn"%>
+<% end %>

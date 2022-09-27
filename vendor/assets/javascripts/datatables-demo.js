@@ -8,6 +8,7 @@
 //   $('[data-toggle="table"]').bootstrapTable();
 // })(jQuery);
 
-$(document).ready(function() {
+jQuery(function() {
   $('#dataTable').DataTable();
 });
+

@@ -1,6 +1,8 @@
 class VouchersController < ApplicationController
   def index
     @voucher = Voucher.all
+    @q = @voucher.ransack(params[:q])
+    @pagy, @voucher = pagy(@q.result(distinct: true), items: params[:per_page])
   end
 
   def new

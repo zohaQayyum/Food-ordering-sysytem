@@ -1986,7 +1986,6 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 1rem;
-  color:  #fff;
 }
 
 .form-text {
@@ -11511,4 +11510,25 @@ table.dataTable thead .sorting_desc:before,
 table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
   bottom: .5em;
+}
+
+.back-btn {
+  background-color: #F0F0F0;
+  color: #000 !important;
+  border-width: 1px;
+  padding: 1px 6px;
+  border-style: outset;
+  border-image: initial;
+  user-select: none;
+  font-size: inherit;
+  line-height: inherit !important;
+  font-family: inherit;
+}
+
+.right-btn {
+  float: right;
+}
+
+.sort-link {
+  color: #858796 !important;
 }

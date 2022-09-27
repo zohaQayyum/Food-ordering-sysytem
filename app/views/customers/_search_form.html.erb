@@ -1,0 +1,3 @@
+<%= search_form_for([:customer, @q], url: url_for(controller: 'customers', action: 'index') ) do |f| %>
+  <%= f.search_field :customer_first_name_or_customer_last_name_or_customer_email_or_customer_contact_or_customer_city_or_customer_state_or_customer_street_address_or_customer_full_name_cont, placeholder:"Search....", class: "right-btn"%>
+<% end %>

@@ -4,4 +4,8 @@ class OrderItem < ApplicationRecord
   has_many :order_histories
   has_many :order_item_add_ons
   has_many :order_item_options
+
+  def order_item_name
+    orderable.name
+  end
 end
