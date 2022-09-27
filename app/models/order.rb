@@ -14,36 +14,6 @@ class Order < ApplicationRecord
     "Delivered": 2,
   }
 
-  delegate :customers, to: :order_items
-  delegate :rating, to: :reviews
-  delegate :remarks, to: :reviews
-  delegate :created_at, to: :reviews
-
-  def customer_name
-    customer.name
-  end
-
-  def customer_email
-    customer.email
-  end
-
-  def customer_contact
-    customer.contact
-  end
-
-  def customer_address
-    customer.address
-  end
-
-  def rating
-    review.rating
-  end
-
-  def remarks
-    review.remarks
-  end
-
-  def created_at
-    review.created_at
-  end
+  delegate :name, :address, :email, :contact, to: :customer
+  delegate :rating, :remarks, :remarks, :created_at, to: :review
 end

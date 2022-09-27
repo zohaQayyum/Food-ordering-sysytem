@@ -64,11 +64,11 @@
                     <tr>
                       <% @order.each do |order| %>
                       <td><%= order.id %></td>
-                      <td><%= order.customer_name %></td>
+                      <td><%= order.name %></td>
                       <td><% order.order_items.each do |order_item| %>
-                        <%= order_item.order_item_name %>
+                        <%= order_item.orderable.name %>
                       <% end %></td>
-                      <td><%= order.customer_address %></td>
+                      <td><%= order.address %></td>
                       <td>$<%= order.total_amount %></td>
                       <td><%= order.status %></td>
                       <td><%= order.date_time %></td>

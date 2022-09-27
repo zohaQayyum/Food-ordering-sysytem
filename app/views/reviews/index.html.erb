@@ -62,7 +62,7 @@
                     <% @order.each do |order| %>
                         <tr>
                           <td><%= order.id %></td>
-                          <td><%= order.customer_name %></td>
+                          <td><%= order.name %></td>
                            <td><% order.order_items.each do |order_item| %>
                             <%= order_item.order_item_name %>
                           <% end %></td>

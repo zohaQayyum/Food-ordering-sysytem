@@ -51,27 +51,25 @@
 
                   <tbody>
                    <% @menu.each do |menu| %>
-                      <% menu.menu_items.each do |menuItems| %>
-                        <% if menuItems.menuable_type == "Deal" %>
-                          <% menu.menu_items.select(:menuable).distinct.each do %>
-                            <tr>
-                              <td><%= menuItems.menuable_id %></td>
-                              <td><%= menuItems.menuable_name %></td>
-                              <td><%= menuItems.menuable_description %></td>
-                              <td><%= menuItems.menuable_price %></td>
-                              <td><%= menuItems.menuable_active_from %></td>
-                              <td><%= menuItems.menuable_active_to %></td>
-                              <% deal = menuItems.menuable_id %>
-                              <td>
-                               <%= link_to "View Details",  deal_items_path(id: deal),
-                                            class: "btn btn-sm btn-secondary" %>
-                                <%= link_to "Edit", edit_deal_path(id: deal),
-                                            class: "btn btn-sm btn-secondary" %>
-                                  <%= link_to "Remove", deal_path(menuItems.menuable_id), method: :delete,
-                                            data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-warning" %>
-                              </td>
-                            </tr>
-                          <% end %>
+                      <%  menu.menu_items.where(menuable_type: "Deal").each do |menuItems|%>
+                        <% menu.menu_items.select(:menuable).distinct.each do %>
+                          <tr>
+                            <td><%= menuItems.menuable_id %></td>
+                            <td><%= menuItems.menuable_name %></td>
+                            <td><%= menuItems.menuable_description %></td>
+                            <td><%= menuItems.menuable_price %></td>
+                            <td><%= menuItems.menuable_active_from %></td>
+                            <td><%= menuItems.menuable_active_to %></td>
+                            <% deal = menuItems.menuable_id %>
+                            <td>
+                              <%= link_to "View Details",  deal_items_path(id: deal),
+                                          class: "btn btn-sm btn-secondary" %>
+                              <%= link_to "Edit", edit_deal_path(id: deal),
+                                          class: "btn btn-sm btn-secondary" %>
+                                <%= link_to "Remove", deal_path(menuItems.menuable_id), method: :delete,
+                                          data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-warning" %>
+                            </td>
+                          </tr>
                         <% end %>
                       <% end %>
                     <% end %>

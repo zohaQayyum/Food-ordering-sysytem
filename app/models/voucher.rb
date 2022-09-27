@@ -9,16 +9,7 @@ class Voucher < ApplicationRecord
     Expire: 1,
   }
 
-  delegate :discount_percent, to: :discounts
-  delegate :discount_type, to: :discounts
-
-  def discount_percent
-    discount.discount_percent
-  end
-
-  def discount_type
-    discount.discount_type
-  end
+  delegate :discount_percent, :discount_type, to: :discount
 
   def name
     "#{promo_code}"

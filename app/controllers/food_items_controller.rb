@@ -3,7 +3,7 @@ class FoodItemsController < ApplicationController
     if params[:restaurant_id]
       @restaurant =  current_employee.restaurant
       @q = @restaurant.menus.ransack(params[:q])
-      @pagy, @menu = pagy(@q.result(distinct: true), items: params[:per_page])
+      @pagy, @menus = pagy(@q.result(distinct: true), items: params[:per_page])
     else
       @food = FoodItem.all
     end

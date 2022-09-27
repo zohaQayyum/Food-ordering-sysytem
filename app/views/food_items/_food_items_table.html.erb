@@ -20,24 +20,22 @@
     </tfoot>
 
   <tbody>
-    <% if @menu %>
-      <% @menu.each do |menu| %>
-        <% menu.menu_items.each do |menuItem| %>
-          <% if menuItem.menuable_type == "GroupItem" %>
-            <% menuItem.menuable.food_items.each do |food| %>
-              <tr>
-                <td><%= food.name %></td>
-                <td><%= food.price %></td>
-                <td><%= food.group_item_name %></td>
-                <td><%= food.discount_percent %>%</td>
-                <td>
-                  <%= link_to "Edit", edit_food_item_path(food),
-                              class: "btn btn-sm btn-secondary" %>
-                    <%= link_to "Remove", food_item_path(food), method: :delete,
-                                data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-warning" %>
-                </td>
-              </tr>
-            <% end %>
+    <% if @menus %>
+      <% @menus.each do |menu| %>
+        <%  menu.menu_items.where(menuable_type: "GroupItem").each do |menuItems| %>
+          <% menuItems.menuable.food_items.each do |food| %>
+            <tr>
+              <td><%= food.name %></td>
+              <td><%= food.price %></td>
+              <td><%= food.group_item_name %></td>
+              <td><%= food.discount_percent %>%</td>
+              <td>
+                <%= link_to "Edit", edit_food_item_path(food),
+                            class: "btn btn-sm btn-secondary" %>
+                  <%= link_to "Remove", food_item_path(food), method: :delete,
+                              data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-warning" %>
+              </td>
+            </tr>
           <% end %>
         <% end %>
       <% end %>
