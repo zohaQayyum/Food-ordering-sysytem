@@ -1,0 +1,28 @@
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+  <thead>
+    <tr>
+      <th><%= sort_link @q, :name, "Name", class: "sort-link"%></th>
+      <th>Weekday</th>
+      <th>Timings</th>
+      <th>View</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tfoot>
+    <tr>
+      <th>Name</th>
+      <th>Weekday</th>
+      <th>Timings</th>
+      <th>View</th>
+      <th>Actions</th>
+    </tr>
+  </tfoot>
+
+  <tbody>
+   <%= render 'menu_item' %>
+  </tbody>
+</table>
+<div class="right-btn">
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
+</div>

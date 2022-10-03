@@ -6,14 +6,19 @@ class ChangeDatatypeofTables < ActiveRecord::Migration[6.1]
     change_table :restaurants do |t|
       t.change :status, :integer, default: 0
     end
+    change_table :employees do |t|
+      t.change :position, :integer, default: 0
+    end
   end
-
   def self.down
     change_table :payments do |t|
       t.change :method, :string
     end
     change_table :restaurants do |t|
       t.change :status, :string
+    end
+    change_table :employees do |t|
+      t.change :position, :string
     end
   end
 end

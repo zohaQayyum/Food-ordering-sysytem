@@ -1,4 +1,4 @@
 class PaymentCutOff < ApplicationRecord
-  belongs_to :payment
-  validates :payment_id, uniqueness: true
+  belongs_to :restaurant
+  validates :restaurant_id, uniqueness: true
 end

@@ -1,9 +1,17 @@
 class Voucher < ApplicationRecord
   has_many :orders
-  has_many :discounts
+  belongs_to :discount
   has_many :voucher_timelines, dependent: :destroy
+  accepts_nested_attributes_for :voucher_timelines
+
   enum voucher_status: {
-    Activate: 0,
-    Deactivate: 1,
+    Active: 0,
+    Expire: 1,
   }
+
+  delegate :discount_percent, :discount_type, to: :discount
+
+  def name
+    "#{promo_code}"
+  end
 end

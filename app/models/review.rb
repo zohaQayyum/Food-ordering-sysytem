@@ -7,4 +7,8 @@ class Review < ApplicationRecord
     "Weak": 3,
     "Unacceptable": 4
   }
+
+  def name
+    "#{rating}"
+  end
 end

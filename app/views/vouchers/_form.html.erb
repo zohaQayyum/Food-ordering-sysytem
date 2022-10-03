@@ -1,0 +1,50 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <%= render 'layouts/sidebar' %>
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div>
+      <%= render 'layouts/navbar' %>
+      <div class="card-body">
+        <%= form_with(model: @voucher, local: true, remote: false) do |f| %>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="voucher_status" class="form-edit-label">Voucher Status</label>
+              <%= f.select :voucher_status, options_for_select(["Active", "Expire"]), {:prompt => "Select One"}, {:class => 'form-control'} %>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="promo_code" class="form-edit-label">Promo Code</label>
+              <%= f.text_field :promo_code, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group  col-md-6">
+            <label for="discount_type" class="form-edit-label">Discount </label>
+            <%= f.select :discount_id, Discount.all.to_a.map  { |t| ["#{t.discount_percent}% #{t.discount_type}", t.id] }, {include_blank: "Select Discount"}, class: "form-control" %>
+          </div>
+
+          <%= f.fields_for :voucher_timelines do |v| %>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="valid_from" class="form-edit-label">Valid From</label>
+                <%= v.datetime_field :valid_from, class: "form-control" %>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="valid_to" class="form-edit-label">Valid To</label>
+                <%= v.datetime_field :valid_to, class: "form-control" %>
+              </div>
+            </div>
+          <% end %>
+          <div class="text-right">
+            <%= link_to "cancel", :back, class: "back-btn" %>
+            <%= f.submit %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/logout_model' %>

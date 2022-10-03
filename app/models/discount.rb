@@ -1,6 +1,8 @@
 class Discount < ApplicationRecord
-  belongs_to :voucher
   belongs_to :restaurant
+  has_many :vouchers
+  has_many :food_items
+
   enum discount_type: {
     Select: 0,
     Flat: 1,

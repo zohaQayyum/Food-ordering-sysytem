@@ -1,0 +1,8 @@
+<%= search_form_for([:voucher, @q], url: url_for(controller: 'vouchers', action: 'index') ,remote: false) do |f| %>
+  <%= f.search_field :promo_code_eq, placeholder:"Promo Code...", class: "right-btn"%>
+  <%= f.label "Status:"%>
+  <%= f.select :voucher_status_eq, Voucher.voucher_statuses.to_a.map { |w| [w[0].humanize, w[1]] },
+                         {:include_blank => true} %>
+  <%= f.submit%>
+
+<% end %>

@@ -1,0 +1,7 @@
+<%= search_form_for([:discount, @q], url: url_for(controller: 'discounts', action: 'index') ) do |f| %>
+  <%= f.search_field :discount_percent_or_created_at_eq, placeholder:"Discount Percent....", class: "right-btn"%>
+  <%= f.label "Type:"%>
+  <%= f.select :discount_type_eq, Discount.discount_types.to_a.map { |w| [w[0].humanize, w[1]] },
+                         {:include_blank => true} %>
+  <%= f.submit%>
+<% end %>

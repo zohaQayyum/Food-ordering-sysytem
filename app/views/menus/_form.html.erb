@@ -1,0 +1,54 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <%= render 'layouts/sidebar' %>
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div >
+      <%= render 'layouts/navbar' %>
+      <div class="card-body">
+        <div class="row gutters">
+          <div class="col-md-3" ></div>
+          <div class="col-xl-12 col-lg-12 col-md-8 col-sm-6 col-12">
+            <%= form_with(model: @menu, local: true, remote: false) do |f| %>
+              <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label for="Name" class="form-edit-label">Name</label>
+                    <%= f.text_field :name, class: "form-control" %>
+                </div>
+              </div>
+
+              <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <%= f.fields_for :menu_timings do |m| %>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="open_to" class="form-edit-label">From</label>
+                        <%= m.datetime_field :open_to, class: "form-control" %>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="open_from" class="form-edit-label">To</label>
+                        <%= m.datetime_field :open_from, class: "form-control" %>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="weekdays" class="form-edit-label">Weekday</label>
+                      <%= m.select :weekdays, options_for_select(["Monday", "Tuesday", "Wednesday","Thursday","Friday","Saturday","Sunday"]), {:prompt => "Please Select"}, {:class => 'form-control'} %>
+                    </div>
+                   <% end %>
+                </div>
+              </div>
+              <div class="text-right">
+                <%= link_to "cancel", :back, class: "back-btn" %>
+                <%= f.submit %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/logout_model' %>
